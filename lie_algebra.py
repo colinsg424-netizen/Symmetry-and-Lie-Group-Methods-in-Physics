@@ -129,3 +129,27 @@ class LieAlgebra:
             for b in range(n):
                 C += K_inv[a,b] * self.generators[a] @ self.generators[b]
         return C
+    def check_jacobi_identity(self, tol=1e-8):
+        gens = self.generators
+        n = len(gens)
+
+        for i in range(n):
+            Xi = gens[i]
+
+            for j in range(n):
+                Xj = gens[j]
+
+                for k in range(n):
+                    Xk = gens[k]
+
+                    # Jacobi combination
+                    jacobi = (
+                        self.commutator(Xi, self.commutator(Xj, Xk)) +
+                        self.commutator(Xj, self.commutator(Xk, Xi)) +
+                        self.commutator(Xk, self.commutator(Xi, Xj))
+                    )
+                    if np.linalg.norm(jacobi) > tol:
+                        print(f"Jacobi failed at (i={i}, j={j}, k={k})")
+                        return False
+        print("Jacobi identity holds for all generator triples.")
+        return True
