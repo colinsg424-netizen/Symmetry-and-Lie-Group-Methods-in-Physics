@@ -1,12 +1,13 @@
 # Lie Algebra for Physics Applications
 
-A Python framework for the construction and numerical analysis of finite-dimensional Lie algebras using matrix representations.
+A Python framework for simulating physical systems governed by Lie group symmetries using matrix representations.
 
-The project implements computational tools for exploring Lie algebra structure, including commutators, structure constants, Jacobi identity verification, Killing forms, Casimir operators, and Lie group exponential maps.
+The library connects abstract symmetry structures directly to physical dynamics, including quantum time evolution, conserved quantities, and rotational symmetries.
 
-A key application demonstrates quantum spin-½ dynamics using the $\mathfrak{su}(2)$ Lie algebra, including time evolution under a magnetic field Hamiltonian.
+A key application demonstrates quantum spin-½ precession in a magnetic field using the $\mathfrak{su}(2)$ Lie algebra, where time evolution is generated through Hamiltonian-driven unitary dynamics.
 
 ---
+# 
 
 # Mathematical Framework
 
@@ -18,7 +19,7 @@ $$
 [X, Y] = XY - YX
 $$
 
-where $X, Y$ are matrices in a chosen representation.
+where $X, Y$ are matrices in a chosen representation. This operation encodes how physics observables interact under symmetry transformations.
 
 ---
 
@@ -30,13 +31,13 @@ $$
 (E_{ij})_{kl} = \delta_{ik}\delta_{jl}
 $$
 
-These are used to construct Lie algebra generators.
+These are used to construct Lie algebra generators used in physics symmetry groups.
 
 ---
 
 ## Construction of $\mathfrak{su}(n)$
 
-Generators are constructed as:
+The special unitary algebra $\mathfrak{su}(n)$ describes symmetries of quantum systems with $n$ internal states.
 
 Generators are constructed as:
 
@@ -52,7 +53,7 @@ $$
 A_{ij} = -\frac{i}{2}(E_{ij} - E_{ji})
 $$
 
-Diagonal traceless generators complete the basis.
+Diagonal traceless generators complete the basis that underlies quantum mechanical symmetries.
 
 ---
 
@@ -69,6 +70,8 @@ with identity generator:
 $$
 T_0 = \frac{1}{\sqrt{2n}} I_n
 $$
+
+This normalization ensures consistent physical scaling across generators.
 
 ---
 
@@ -92,7 +95,7 @@ $$
 [T_a, T_b] = \sum_c f_{abc} T_c
 $$
 
-The structure constants are computed using projection onto the generator basis.
+The structure constants are computed using projection onto the generator basis. These coefficients decide the dynamics of a physical system.
 
 ---
 
@@ -110,15 +113,21 @@ $$
 (\mathrm{ad}_{T_a})_{bc} = f_{abc}
 $$
 
+This represents how a Lie algebra's own symmetries act on the algebra itself.
+
 ---
 
 ## Killing Form
+
+The Killing form provides an invariant measure of symmetry structure.
 
 Computed as:
 
 $$
 K(X, Y) = \mathrm{Tr}(\mathrm{ad}_X \, \mathrm{ad}_Y)
 $$
+
+It is used in physics to compare symmetry algebras.
 
 ---
 
@@ -130,19 +139,24 @@ $$
 C_2 = \sum_{a,b} (K^{-1})_{ab} T_a T_b
 $$
 
-and commutes with all generators.
+and commutes with all generators. This makes it a conserved quantity under symmetry transformations.
 
 ---
 
 ## Lie Group Exponential Map
-
-Lie group elements are obtained via:
+Continuous symmetry transformations are generated via:
 
 $$
 U = e^{iX}
 $$
 
-and implemented numerically using matrix exponentiation.
+In quantum mechanics -- as seen in the Larmor precession simulation -- this becomes the time evolution operator:
+
+$$
+U = e^{-iHt}
+$$
+
+This is the central mechanics connecting Lie algebras to dynamic quantum systems.
 
 ---
 
@@ -168,7 +182,7 @@ $$
 \psi(t) = e^{-iHt} \psi(0)
 $$
 
-This models quantum spin precession under Larmor dynamics.
+This models quantum spin precession under Larmor dynamics, where SU(2) symmetry generators govern the evoltuion of the quantum state.
 
 ---
 
